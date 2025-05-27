@@ -1,40 +1,32 @@
+"use client"
 import { UserButton } from '@clerk/nextjs'
 import { SignedOut } from '@clerk/nextjs'
 import { SignInButton } from '@clerk/nextjs'
 import { SignedIn } from '@clerk/nextjs'
-import Link from 'next/link'
 import React from 'react'
-import ThemeWrapper from './ThemeWrapper'
+import { useTheme } from '@/context/ThemeContext'
+import Link from 'next/link'
 
 function Navbar() {
+    const { theme, toggleTheme } = useTheme()
     return (
-
-        <nav className="navbar navbar-expand-lg bg-body border-bottom px-3">
-            <div className="container-fluid">
-
-                <Link className="navbar-brand fw-bold" href="/">NotionKlonu</Link>
-
+        <nav className="navbar navbar-expand-lg bg-body border-bottom px-3" >
+            <Link href={'/'} > <div className='navbar-brand fw-bold'>
+                Notion</div></Link>
+            <div className="container-fluid justify-content-end p-1">
                 <button
-                    className="navbar-toggler"
+                    className="navbar-toggler m-auto p-4"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarContent"
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-            <div className="collapse navbar-collapse" id="navbarContent">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    {/* Giriş yapan kullanıcıya özel linkler */}
-                    <SignedIn>
-                        <li className="nav-item">
-                            <Link className="nav-link" href="/dashboard">Dashboard</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" href="/pages">Sayfalar</Link>
-                        </li>
-                    </SignedIn>
-                </ul>
-
+                <div className="d-flex align-items-center gap-3 p-1">
+                    <button className="btn m-auto" onClick={toggleTheme}>
+                        {theme === 'light' ? '🌙' : '☀️'}
+                    </button>
+                </div>
                 <div className="d-flex align-items-center gap-3">
                     <SignedOut>
                         <SignInButton>
@@ -47,7 +39,6 @@ function Navbar() {
                     </SignedIn>
                 </div>
             </div>
-        </div>
         </nav >
     )
 }
