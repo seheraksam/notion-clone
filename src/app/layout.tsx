@@ -3,20 +3,23 @@ import { ThemeProvider } from '@/context/ThemeContext'
 import Navbar from '@/components/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './globals.css'
+import Sidebar from '@/components/SideBar'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <ThemeProvider>
-        <html lang="en">
-          <body>
-            <Navbar />
-            <main className="min-vh-100 bg-body text-body">
+    <html lang="en">
+      <body>
+        <ThemeProvider>
+          <div className="d-flex">
+            <Sidebar />
+            <main className="flex-grow-1 p-4 bg-body text-body">
               {children}
             </main>
-          </body>
-        </html>
-      </ThemeProvider>
-    </ClerkProvider>
+          </div>
+        </ThemeProvider>
+      </body>
+    </html>
+  </ClerkProvider>
   )
 }
