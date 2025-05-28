@@ -11,6 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ThemeProvider>
+        <Navbar/>
           <div className="d-flex">
             <Sidebar />
             <main className="flex-grow-1 p-4 bg-body text-body">
