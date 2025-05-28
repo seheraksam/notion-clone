@@ -3,6 +3,22 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server"
 
+export async function updatePage(id: string, data: { title?: string, content?: string }) {
+  const userId = await getDbUserId()
+  if (!userId) throw new Error("Unauthorized")
+
+  const page = await prisma.page.updateMany({
+    where: {
+      id,
+      userId,
+    },
+    data,
+  })
+
+  return page
+}
+
+
 // Clerk kullanıcısına karşılık gelen kendi DB'deki kullanıcı ID'sini getirir
 export async function getDbUserId() {
   const { userId: clerkId } = await auth()
@@ -25,6 +41,22 @@ export async function getUserbyClerkId(clerkId: string) {
   })
 }
 
+export async function updatePageVisibility(pageId: string, isPublic: boolean) {
+  const userId = await getDbUserId()
+  if (!userId) throw new Error('Unauthorized')
+
+  await prisma.page.update({
+    where: {
+      id: pageId,
+      userId: userId, // sadece sahibiyse değiştirebilsin
+    },
+    data: {
+      isPublic,
+    },
+  })
+}
+
+
 // Sayfa oluşturma
 export async function createPage(title: string, content: string) {
   const userId = await getDbUserId()
@@ -35,6 +67,7 @@ export async function createPage(title: string, content: string) {
       userId,
       title,
       content,
+      isPublic:false,
     },
   })
 
