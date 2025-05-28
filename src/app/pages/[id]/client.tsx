@@ -3,6 +3,8 @@
 import { updatePage, updatePageVisibility } from "@/app/actions/page.action"
 import { useEffect, useState, useTransition } from "react"
 import { useParams } from "next/navigation"
+import RichEditor from "@/components/RichEditor"
+
 
 export default function PageDetailClient({ pageData }: {
     pageData: {
@@ -16,6 +18,7 @@ export default function PageDetailClient({ pageData }: {
     const [title, setTitle] = useState(pageData.title)
     const [content, setContent] = useState(pageData.content)
 
+    
     const handleToggle = () => {
         setIsPublic(prev => !prev)
 
@@ -34,6 +37,17 @@ export default function PageDetailClient({ pageData }: {
 
     return (
         <div className="p-4">
+            {isPublic && (
+                <div className="mt-3">
+                    <label className="form-label">Paylaşılabilir Bağlantı:</label>
+                    <input
+                        className="form-control"
+                        readOnly
+                        value={`${process.env.NEXT_PUBLIC_SITE_URL}/share/${pageData.id}`}
+                    />
+                </div>
+            )}
+
             <button
                 onClick={handleToggle}
                 className="btn btn-outline-primary mb-3"
@@ -46,12 +60,7 @@ export default function PageDetailClient({ pageData }: {
                 onChange={(e) => setTitle(e.target.value)}
                 className="form-control mb-3"
             />
-            <textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                className="form-control"
-                rows={10}
-            />
+            <RichEditor content={content} onChange={setContent} />
         </div>
     )
 }
