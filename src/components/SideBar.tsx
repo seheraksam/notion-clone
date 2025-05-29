@@ -1,25 +1,20 @@
-import Link from 'next/link'
+// components/Sidebar.tsx
 import { getAllPage } from '@/app/actions/page.action'
-import NewPageButton from './NewPageButton';
+import NewPageButton from './NewPageButton'
+import SidebarClient from './SideBarClient'
 
 export default async function Sidebar() {
   const pages = await getAllPage()
 
   return (
     <aside className="p-3 border-end min-vh-100 bg-body">
-      <h5 className="mb-3 text-decoration-none text-body">Pages</h5>
+      <h5 className="mb-3">Pages</h5>
       <NewPageButton />
-      <div className="d-flex flex-column gap-2 mt-3">
-        {pages.map((page: { id: string; title: string }) => (
-          <Link
-            key={page.id}
-            href={`/pages/${page.id}`}
-            className="text-decoration-none text-body"
-          >
-            {page.title || 'Untitled'}
-          </Link>
-        ))}
-      </div>
+      {pages ? (
+        <SidebarClient pages={pages} />
+      ) : (
+        <div className="text-muted">Giriş yapmanız gerekiyor</div>
+      )}
     </aside>
   )
 }
