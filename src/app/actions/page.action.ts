@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache";
+import router from "next/router";
 
 export async function updatePage(id: string, data: { title?: string, content?: string }) {
   const userId = await getDbUserId()
@@ -71,7 +72,7 @@ export async function deletePage(id: string) {
 
   revalidatePath("/");
 
-  return { success: true };
+  return { success: true,page };
 }
 
 // Sayfa oluşturma

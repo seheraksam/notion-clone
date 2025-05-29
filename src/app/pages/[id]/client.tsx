@@ -7,6 +7,8 @@ import RichEditor from "@/components/RichEditor"
 import CopyShareLinkButton from "@/components/CopySharedLinkButton"
 import { Button, Toast } from "react-bootstrap"
 import toast from 'react-hot-toast';
+import { Grid, Trash } from "lucide-react"
+import { revalidatePath } from "next/cache"
 
 
 export default function PageDetailClient({ pageData }: {
@@ -33,10 +35,10 @@ export default function PageDetailClient({ pageData }: {
                 startTransition(() => {
                     deletePage(pageData.id)
                 })
-              } else {
+                toast.success("notes Deleted succesfully")
+            } else {
                 toast.error("notes not deleted")
-              }
-            toast.success("notes Deleted succesfully")
+            }
         } catch (error) {
             toast.error("notes not deleted")
         }
@@ -52,16 +54,20 @@ export default function PageDetailClient({ pageData }: {
     }, [title, content, pageData.id])
 
     return (
-        <div className="p-4">
-            <Button variant="danger" size="sm" onClick={() => handleDelete()}>
-                <Trash/>
-            </Button>
-            {isPublic && (
-                <div className="mt-3">
+        <div className="p-4 flex gap-2">
+            <div className="d-flex gap-2">
+                <Button className="btn" variant="danger" size="sm" onClick={() => handleDelete()}>
+                    <Trash />
+                </Button>
+
+                <Button onClick={handleToggle} className="btn">
                     <label className="form-label">{isPublic ? '🔓 public' : '🔒 private'}</label>
-                    <CopyShareLinkButton pageId={pageData.id} />
-                </div>
+                </Button>
+                {isPublic && (
+                <CopyShareLinkButton pageId={pageData.id} />
             )}
+            </div>
+            <div className="py-3">
             <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -69,6 +75,7 @@ export default function PageDetailClient({ pageData }: {
             />
 
             <RichEditor content={content} onChange={setContent} />
+            </div>
         </div>
     )
 }
