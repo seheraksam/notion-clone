@@ -70,7 +70,8 @@ export async function deletePage(id: string) {
   })
 
   revalidatePath("/");
-  return page
+
+  return { success: true };
 }
 
 // Sayfa oluşturma

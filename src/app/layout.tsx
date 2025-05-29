@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './globals.css'
 import Sidebar from '@/components/SideBar'
-import { Toast } from 'react-bootstrap'
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

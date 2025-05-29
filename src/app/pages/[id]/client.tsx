@@ -5,7 +5,8 @@ import { useEffect, useState, useTransition } from "react"
 import { useParams } from "next/navigation"
 import RichEditor from "@/components/RichEditor"
 import CopyShareLinkButton from "@/components/CopySharedLinkButton"
-import { Button } from "react-bootstrap"
+import { Button, Toast } from "react-bootstrap"
+import toast from 'react-hot-toast';
 
 
 export default function PageDetailClient({ pageData }: {
@@ -27,9 +28,18 @@ export default function PageDetailClient({ pageData }: {
     }
 
     const handleDelete = () => {
-        startTransition(() => {
-            deletePage(pageData.id)
-        })
+        try {
+            if (confirm("Press a button!") === true) {
+                startTransition(() => {
+                    deletePage(pageData.id)
+                })
+              } else {
+                toast.error("notes not deleted")
+              }
+            toast.success("notes Deleted succesfully")
+        } catch (error) {
+            toast.error("notes not deleted")
+        }
     }
 
 
@@ -44,10 +54,8 @@ export default function PageDetailClient({ pageData }: {
     return (
         <div className="p-4">
             <Button variant="danger" size="sm" onClick={() => handleDelete()}>
-                <i className="bi bi-trash"></i>
+                <Trash/>
             </Button>
-            <div>
-            </div>
             {isPublic && (
                 <div className="mt-3">
                     <label className="form-label">{isPublic ? '🔓 public' : '🔒 private'}</label>
