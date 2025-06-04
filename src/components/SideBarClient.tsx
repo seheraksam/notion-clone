@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import styles from './Sidebar.module.css'
 
 export default function SidebarClient({
   pages,
@@ -11,21 +12,18 @@ export default function SidebarClient({
   const pathname = usePathname()
 
   return (
-    <div className="d-flex flex-column gap-2 mt-3">
-   
-
+    <div className={`${styles.sidebar}`}>
       {pages.map((page) => {
         const isActive = pathname === `/pages/${page.id}`
         return (
           <Link
             key={page.id}
             href={`/pages/${page.id}`}
-            className={`text-decoration-none p-2 rounded ${
-              isActive ? 'bg-primary text-white' : 'text-body'
-            }`}
+            className={`${styles.link} rounded ${isActive ? styles.active : ''}`}
           >
             {page.title || 'Untitled'}
           </Link>
+
         )
       })}
     </div>

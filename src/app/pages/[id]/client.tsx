@@ -71,7 +71,7 @@ export default function PageDetailClient({ pageData }: {
             <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="form-control mb-3"
+                className="form-control mb-3 "
             />
 
             <RichEditor content={content} onChange={setContent} />

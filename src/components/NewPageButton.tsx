@@ -4,6 +4,7 @@ import { createPage } from '@/app/actions/page.action'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { useUser } from '@clerk/nextjs'
+import styles from './Sidebar.module.css'
 
 export default function NewPageButton() {
   const router = useRouter()
@@ -14,7 +15,6 @@ export default function NewPageButton() {
       toast.error("You must sign in!")
       return
     }
-
     const page = await createPage("Yeni Sayfa", "")
     if (page instanceof Error) {
       console.error("Sayfa oluşturulurken hata oluştu:", page)
@@ -25,7 +25,7 @@ export default function NewPageButton() {
   }
 
   return (
-    <button className="btn btn-outline-primary w-100" onClick={handleClick}>
+    <button className={styles.newPageButton} onClick={handleClick}>
       + New Page
     </button>
   )

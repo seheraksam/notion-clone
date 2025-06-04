@@ -10,7 +10,7 @@ import Link from 'next/link'
 function Navbar() {
     const { theme, toggleTheme } = useTheme()
     return (
-        <nav className="navbar navbar-expand-lg bg-body border-bottom px-3" >
+        <nav className="navbar navbar-expand-lg localbody border-bottom px-3" >
             <Link href={'/'} > <div className='navbar-brand fw-bold'>
                 Notion</div></Link>
             <div className="container-fluid justify-content-end p-1">
@@ -33,7 +33,6 @@ function Navbar() {
                             <button className="btn btn-outline-primary">Giriş Yap</button>
                         </SignInButton>
                     </SignedOut>
-
                     <SignedIn>
                         <UserButton afterSignOutUrl="/" />
                     </SignedIn>

@@ -1,0 +1,109 @@
+.editorWrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* Trix'in kendi butonlarını gizle */
+.editorWrapper :global(.trix-button-row) {
+  display: none !important;
+}
+
+.trixEditor {
+  min-height: 200px;
+  color: var(--color-text);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.trixEditor :global(.trix-content) {
+  min-height: 200px;
+  color: var(--color-text);
+}
+
+.trixEditor :global(.trix-content h1) {
+  font-size: 1.5em;
+  margin: 1em 0 0.5em;
+}
+
+.trixEditor :global(.trix-content ul) {
+  padding-left: 1.5em;
+}
+
+.trixEditor :global(.trix-content p) {
+  margin: 0;
+  min-height: 1.5em;
+}
+
+/* Trix butonları için stiller */
+.trixEditor :global(.trix-button-row) {
+  background-color: var(--side-bar-back);
+  border-bottom: 1px solid var(--color-dactive-text);
+}
+
+.trixEditor :global(.trix-button) {
+  color: var(--color-text);
+  border-color: var(--color-dactive-text);
+}
+
+.trixEditor :global(.trix-button:hover) {
+  background-color: var(--color-link-hover);
+}
+
+.trixEditor :global(.trix-button.trix-active) {
+  background-color: var(--color-link-active);
+  color: #ffffff;
+}
+
+.trixEditor :global(.trix-button-group) {
+  border-color: var(--color-dactive-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  .trixEditor {
+    color: #ffffff;
+  }
+
+  .trixEditor :global(.trix-content) {
+    color: #ffffff;
+  }
+
+  .trixEditor :global(.trix-button-row) {
+    background-color: var(--side-bar-back);
+    border-bottom-color: var(--color-dactive-text);
+  }
+
+  .trixEditor :global(.trix-button) {
+    color: #ffffff;
+    border-color: var(--color-dactive-text);
+  }
+
+  .trixEditor :global(.trix-button:hover) {
+    background-color: var(--color-link-hover);
+  }
+
+  .trixEditor :global(.trix-button.trix-active) {
+    background-color: var(--color-link-active);
+    color: #ffffff;
+  }
+
+  .trixEditor :global(.trix-button-group) {
+    border-color: var(--color-dactive-text);
+  }
+}
+
+/* Bootstrap form-control override */
+.editorWrapper :global(.form-control) {
+  background-color: transparent;
+  border-color: var(--color-dactive-text);
+  height: auto;
+  min-height: 200px;
+  resize: none;
+}
+
+.editorWrapper :global(.form-control:focus) {
+  background-color: transparent;
+  border-color: var(--color-new-page);
+  box-shadow: none;
+} 

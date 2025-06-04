@@ -1,0 +1,101 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 250;
+  gap: 0.5rem;
+  flex-direction: column;
+  margin-top: 1rem;
+  color: var(--color-new-page);
+  background-color: var(--side-bar-back);
+}
+
+.sidebar.active {
+  background-color: var(--side-bar-back);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  min-height: 100vh;
+  border-right: 1px solid var(--color-dactive-text);
+  background-color: var(--side-bar-back);
+  color: var(--foreground);
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: var(--foreground);
+}
+
+.logo {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--foreground);
+  font-stretch: expanded;
+  padding: 5%;
+  margin: 2%;
+}
+
+.newPageButton {
+  width: 100%;
+  background-color: var(--color-new-page);
+  color: var(--background);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 200;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.newPageButton:hover {
+  background-color: var(--color-link-hover);
+}
+
+.sidebarTitle {
+  padding: 12px;
+  font-weight: 200;
+  font-size: 1.25rem;
+  color: var(--foreground);
+  padding-left: 0.25rem;
+}
+
+.link {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.link:hover {
+  background-color: var(--color-link-hover);
+  color: var(--color-text);
+}
+
+.active {
+  background-color: var(--color-link-active);
+  color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link {
+    color: var(--foreground);
+  }
+
+  .link:hover {
+    background-color: var(--color-link-hover);
+    color: var(--foreground);
+  }
+
+  .active {
+    background-color: var(--color-link-active);
+    color: #ffffff;
+  }
+}

@@ -12,7 +12,7 @@ export default async function PublicPage({ params }: { params: { id: string } })
     <div className="container py-5">
       <h1 className="mb-3">{page.title || 'Untitled'}</h1>
       <div
-        className="p-3 bg-body border rounded"
+        className="p-3 localbody border rounded"
         dangerouslySetInnerHTML={{ __html: page.content }}
       />
     </div>

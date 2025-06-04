@@ -2,13 +2,17 @@
 import { getAllPage } from '@/app/actions/page.action'
 import NewPageButton from './NewPageButton'
 import SidebarClient from './SideBarClient'
+import styles from './Sidebar.module.css'
+import Link from 'next/link'
 
 export default async function Sidebar() {
   const pages = await getAllPage()
 
   return (
-    <aside className="p-3 border-end min-vh-100 bg-body">
-      <h5 className="mb-3">Pages</h5>
+    <aside className={styles.sidebar}>
+      <Link href="/" className={styles.logoWrapper}>
+        <span className={styles.logo}>Pages</span>
+      </Link>
       <NewPageButton />
       {pages ? (
         <SidebarClient pages={pages} />

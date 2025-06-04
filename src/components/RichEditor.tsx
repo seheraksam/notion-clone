@@ -1,8 +1,29 @@
 'use client'
 
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import styles from './RichEditor.module.css'
+import 'trix/dist/trix.css'
+
+// Trix elementini TypeScript'e tanıt
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'trix-editor': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        input: string;
+      };
+    }
+  }
+  interface Window {
+    Trix: any;
+  }
+}
+
+// Trix input elementini genişlet
+interface TrixInputElement extends HTMLInputElement {
+  editor: {
+    loadHTML: (html: string) => void;
+  };
+}
 
 export default function RichEditor({
   content,
@@ -11,39 +32,46 @@ export default function RichEditor({
   content: string
   onChange: (value: string) => void
 }) {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content,
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML())
-    },
-  })
+  const editorRef = useRef<TrixInputElement>(null)
 
   useEffect(() => {
-    if (editor) editor.commands.setContent(content)
+    if (editorRef.current) {
+      const trixEditor = editorRef.current.editor
+      if (trixEditor) {
+        trixEditor.loadHTML(content)
+      }
+    }
   }, [content])
 
-  if (!editor) return null
+  useEffect(() => {
+    const handleChange = (event: any) => {
+      onChange(event.target.value)
+    }
+
+    const editor = editorRef.current
+    if (editor) {
+      editor.addEventListener('trix-change', handleChange)
+    }
+
+    return () => {
+      if (editor) {
+        editor.removeEventListener('trix-change', handleChange)
+      }
+    }
+  }, [onChange])
 
   return (
-    <div>
-      <div className="mb-2 d-flex flex-wrap gap-2">
-        <button className="btn btn-sm btn-outline-dark" onClick={() => editor.chain().focus().toggleBold().run()}>
-          Bold
-        </button>
-        <button className="btn btn-sm btn-outline-dark" onClick={() => editor.chain().focus().toggleItalic().run()}>
-          Italic
-        </button>
-        <button className="btn btn-sm btn-outline-dark" onClick={() => editor.chain().focus().toggleBulletList().run()}>
-          List
-        </button>
-        <button className="btn btn-sm btn-outline-dark" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>
-          Title
-        </button>
-      </div>
-
-      <div className="border rounded p-3 bg-body">
-        <EditorContent editor={editor} />
+    <div className={styles.editorWrapper}>
+      <div className="form-control border rounded p-4">
+        <input
+          id="trix-editor"
+          type="hidden"
+          ref={editorRef}
+        />
+        <trix-editor
+          input="trix-editor"
+          className={styles.trixEditor}
+        />
       </div>
     </div>
   )

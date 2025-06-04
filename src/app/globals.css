@@ -1,22 +1,47 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light tema varsayılan değerleri */
+  --background: #fffffe;
+  --foreground: #444343;
+  --color-text: #212529;
+  --color-bg: #f8f9fa;
+  --color-link-hover: rgba(0, 123, 255, 0.1);
+  --color-sidebar-bg: #444343;
+  --color-link-active: #4c000f;
+  --color-active-text: #c0bab6;
+  --color-new-page: #5298e2;
+  --color-selected-page: #444343;
+  --color-title: #d4d4d4;
+  --color-dactive-text: #5d5d5d;
+  --side-bar-back: #f8f8f6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark tema için data-theme attribute'u */
+[data-bs-theme="dark"] {
+  --background: #191918;
+  --foreground: #f1f3f5;
+  --color-text: #212529;
+  --color-bg: #f8f9fa;
+  --color-link-hover: rgba(0, 123, 255, 0.08);
+  --color-sidebar-bg: #e9ecef;
+  --color-link-active: #212529;
+  --color-active-text: #003865;
+  --color-new-page: #0d6efd;
+  --color-selected-page: #dee2e6;
+  --color-title: #212529;
+  --color-dactive-text: #adb5bd;
+  --side-bar-back: #202120;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   overflow-x: hidden;
   padding: 0;
+  color: var(--side-bar-back);
+  background-color: var(--side-bar-back);
 }
 
 body {
@@ -41,8 +66,7 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.localbody {
+  color: var(--color-text);
+  background: var(--background);
 }
