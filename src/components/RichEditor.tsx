@@ -8,6 +8,7 @@ import 'trix/dist/trix.css'
 declare global {
   namespace JSX {
     interface IntrinsicElements {
+      'trix-toolbar': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
       'trix-editor': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
         input: string;
       };
@@ -68,9 +69,12 @@ export default function RichEditor({
           type="hidden"
           ref={editorRef}
         />
-        <trix-editor
-          input="trix-editor"
+        <div
+          role="textbox"
+          contentEditable
           className={styles.trixEditor}
+          data-trix-editor
+          data-trix-input="trix-editor"
         />
       </div>
     </div>

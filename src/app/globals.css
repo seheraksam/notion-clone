@@ -21,7 +21,7 @@
 [data-bs-theme="dark"] {
   --background: #191918;
   --foreground: #f1f3f5;
-  --color-text: #212529;
+  --color-text: #f8f9fa;
   --color-bg: #f8f9fa;
   --color-link-hover: rgba(0, 123, 255, 0.08);
   --color-sidebar-bg: #e9ecef;

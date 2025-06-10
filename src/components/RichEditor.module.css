@@ -3,9 +3,45 @@
   margin: 0 auto;
 }
 
-/* Trix'in kendi butonlarını gizle */
-.editorWrapper :global(.trix-button-row) {
-  display: none !important;
+/* Trix toolbar ve butonları için stiller */
+.trixEditor :global(.trix-toolbar) {
+  background-color: var(--side-bar-back);
+  border-bottom: 1px solid var(--color-dactive-text);
+  padding: 0.5rem;
+}
+
+.trixEditor :global(.trix-button-row) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.trixEditor :global(.trix-button) {
+  color: var(--color-text);
+  border: 1px solid var(--color-dactive-text);
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.trixEditor :global(.trix-button:hover) {
+  background-color: var(--color-link-hover);
+}
+
+.trixEditor :global(.trix-button.trix-active) {
+  background-color: var(--color-link-active);
+  color: #ffffff;
+}
+
+.trixEditor :global(.trix-button-group) {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trixEditor :global(.trix-button-group:not(:last-child)) {
+  margin-right: 0.5rem;
 }
 
 .trixEditor {
@@ -20,6 +56,7 @@
 .trixEditor :global(.trix-content) {
   min-height: 200px;
   color: var(--color-text);
+  padding: 1rem 0;
 }
 
 .trixEditor :global(.trix-content h1) {
@@ -36,30 +73,6 @@
   min-height: 1.5em;
 }
 
-/* Trix butonları için stiller */
-.trixEditor :global(.trix-button-row) {
-  background-color: var(--side-bar-back);
-  border-bottom: 1px solid var(--color-dactive-text);
-}
-
-.trixEditor :global(.trix-button) {
-  color: var(--color-text);
-  border-color: var(--color-dactive-text);
-}
-
-.trixEditor :global(.trix-button:hover) {
-  background-color: var(--color-link-hover);
-}
-
-.trixEditor :global(.trix-button.trix-active) {
-  background-color: var(--color-link-active);
-  color: #ffffff;
-}
-
-.trixEditor :global(.trix-button-group) {
-  border-color: var(--color-dactive-text);
-}
-
 @media (prefers-color-scheme: dark) {
   .trixEditor {
     color: #ffffff;
@@ -69,7 +82,7 @@
     color: #ffffff;
   }
 
-  .trixEditor :global(.trix-button-row) {
+  .trixEditor :global(.trix-toolbar) {
     background-color: var(--side-bar-back);
     border-bottom-color: var(--color-dactive-text);
   }
@@ -86,10 +99,6 @@
   .trixEditor :global(.trix-button.trix-active) {
     background-color: var(--color-link-active);
     color: #ffffff;
-  }
-
-  .trixEditor :global(.trix-button-group) {
-    border-color: var(--color-dactive-text);
   }
 }
 
